@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon",
+    "sequelize": "sequelize-auto -h localhost -d postoffice -u root -x 12345 -p 3306  --dialect mysql -o ./models -l es6"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.4.0",
+    "sequelize": "^6.32.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
