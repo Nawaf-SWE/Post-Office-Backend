@@ -2,24 +2,16 @@ const express = require('express');
 const app = express()
 require("dotenv").config();
 const {connect} = require("./config/db");
-const { cities, packages } = require('./models');
+const errorHandler = require("./middlewares/errorHandler");
 
 connect();
 
 app.use(express.json({limit: "50MB"}));
 
-app.get("/", async (req, res) => {
-   const data = await cities.findAll({ 
-    where: {},
-    include: [
-    {
-        model: packages,
-        as: "sender_city_packages",
-    }
-   ],
-});
-   res.send(data);
-});
+app.use("/admin",require("./router/admin"));
+app.use("/customers",require("./router/customers"));
+
+app.use(errorHandler);
 
 app.listen(process.env.PORT,()=>{
    console.log(`Server listening on port ${process.env.PORT}`);
