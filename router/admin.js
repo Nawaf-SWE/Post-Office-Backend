@@ -1,25 +1,47 @@
 const express = require("express");
-const { login, createUser } = require("../controllers/admin_ctl");
-const { IsAdmin } = require("../middlewares/authenticated");
+const { login, getAdmin, updateAdmin, 
+    getCities, createCity, updateCity, 
+    getBranches, createBranch, updateBranch, 
+    getUsers, createUser, updateUser,
+    getTrackings, createTracking, 
+    getPackages, createPackage } = require("../controllers/admin_ctl");
+const { IsAdmin, IsUser } = require("../middlewares/authenticated");
 const router = express.Router();
 
 
-router.route("/login").post(login);
+router.route("/login")
+    .post(login);
 
-router.route("/me").get().post();
+router.route("/me")
+    .get(IsAdmin, getAdmin)
+    .post(IsAdmin, updateAdmin);
 
-router.route("/cities").get().post();
-router.route("/cities/:id").put();
+router.route("/cities")
+    .get(IsUser, getCities)
+    .post(IsAdmin, createCity);
 
-router.route("/branches").get().post();
-router.route("/branches/:id").put();
+router.route("/cities/:id")
+    .put(IsAdmin, updateCity);
 
-router.route("/users").get().post(IsAdmin,createUser);
-router.route("/users/:id").put();
+router.route("/branches")
+    .get(IsUser, getBranches)
+    .post(IsAdmin, createBranch);
+router.route("/branches/:id")
+    .put(IsAdmin, updateBranch);
 
-router.route("/trackings").get().post();
+router.route("/users")
+    .get(IsUser, getUsers)
+    .post(IsAdmin, createUser);
+router.route("/users/:id")
+    .put(IsAdmin, updateUser);
 
-router.route("/packages").get().post();
+router.route("/trackings")
+    .get(IsUser, getTrackings)
+    .post(IsUser, createTracking);
+
+router.route("/packages")
+    .get(IsUser, getPackages)
+    .post(IsUser, createPackage);
 
 
 
