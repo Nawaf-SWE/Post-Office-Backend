@@ -14,11 +14,13 @@ class cities extends Sequelize.Model {
     },
     name_ar: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: false,
+      unique: "name_ar_UNIQUE"
     },
     name_en: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: false,
+      unique: "name_en_UNIQUE"
     }
   }, {
     sequelize,
@@ -31,6 +33,22 @@ class cities extends Sequelize.Model {
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "name_ar_UNIQUE",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "name_ar" },
+        ]
+      },
+      {
+        name: "name_en_UNIQUE",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "name_en" },
         ]
       },
     ]

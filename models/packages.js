@@ -13,16 +13,16 @@ class packages extends Sequelize.Model {
       primaryKey: true
     },
     weight: {
-      type: DataTypes.DOUBLE(10,10),
+      type: DataTypes.DECIMAL(9,6),
       allowNull: false
     },
     shipping_type: {
       type: DataTypes.STRING(25),
       allowNull: false,
-      defaultValue: "regular"
+      defaultValue: "Regular"
     },
     cost: {
-      type: DataTypes.DOUBLE(10,10),
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     package_category: {
@@ -53,14 +53,6 @@ class packages extends Sequelize.Model {
       type: DataTypes.STRING(150),
       allowNull: false
     },
-    receiver_city_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'cities',
-        key: 'id'
-      }
-    },
     receiver_branch_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -75,8 +67,7 @@ class packages extends Sequelize.Model {
     },
     sender_phone: {
       type: DataTypes.STRING(10),
-      allowNull: false,
-      unique: "sender_phone"
+      allowNull: false
     },
     sender_email: {
       type: DataTypes.STRING(150),
@@ -94,14 +85,6 @@ class packages extends Sequelize.Model {
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    sender_city_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'cities',
-        key: 'id'
-      }
-    },
     sender_branch_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -109,6 +92,11 @@ class packages extends Sequelize.Model {
         model: 'branches',
         key: 'id'
       }
+    },
+    tracking_no: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      unique: "tracking_number_UNIQUE"
     }
   }, {
     sequelize,
@@ -124,18 +112,11 @@ class packages extends Sequelize.Model {
         ]
       },
       {
-        name: "sender_phone",
+        name: "tracking_number_UNIQUE",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "sender_phone" },
-        ]
-      },
-      {
-        name: "receiver_city_id",
-        using: "BTREE",
-        fields: [
-          { name: "receiver_city_id" },
+          { name: "tracking_no" },
         ]
       },
       {
@@ -143,13 +124,6 @@ class packages extends Sequelize.Model {
         using: "BTREE",
         fields: [
           { name: "receiver_branch_id" },
-        ]
-      },
-      {
-        name: "sender_city_id",
-        using: "BTREE",
-        fields: [
-          { name: "sender_city_id" },
         ]
       },
       {

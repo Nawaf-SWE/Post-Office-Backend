@@ -51,11 +51,11 @@ class users extends Sequelize.Model {
       }
     },
     lat: {
-      type: DataTypes.FLOAT(10,10),
+      type: DataTypes.DECIMAL(9,6),
       allowNull: true
     },
     lng: {
-      type: DataTypes.FLOAT(10,10),
+      type: DataTypes.DECIMAL(9,6),
       allowNull: true
     }
   }, {

@@ -34,17 +34,12 @@ class customers extends Sequelize.Model {
       allowNull: true
     },
     lat: {
-      type: DataTypes.FLOAT(10,10),
+      type: DataTypes.DECIMAL(9,6),
       allowNull: true
     },
     lng: {
-      type: DataTypes.FLOAT(10,10),
+      type: DataTypes.DECIMAL(9,6),
       allowNull: true
-    },
-    ceatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     },
     phone: {
       type: DataTypes.STRING(10),

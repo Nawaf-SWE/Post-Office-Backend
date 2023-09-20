@@ -2,6 +2,7 @@ const DataTypes = require("sequelize").DataTypes;
 const _branches = require("./branches");
 const _cities = require("./cities");
 const _customers = require("./customers");
+const _fees = require("./fees");
 const _packages = require("./packages");
 const _tracking = require("./tracking");
 const _users = require("./users");
@@ -10,6 +11,7 @@ function initModels(sequelize) {
   const branches = _branches(sequelize, DataTypes);
   const cities = _cities(sequelize, DataTypes);
   const customers = _customers(sequelize, DataTypes);
+  const fees = _fees(sequelize, DataTypes);
   const packages = _packages(sequelize, DataTypes);
   const tracking = _tracking(sequelize, DataTypes);
   const users = _users(sequelize, DataTypes);
@@ -24,10 +26,6 @@ function initModels(sequelize) {
   branches.hasMany(users, { as: "users", foreignKey: "branch_id"});
   branches.belongsTo(cities, { as: "city", foreignKey: "city_id"});
   cities.hasMany(branches, { as: "branches", foreignKey: "city_id"});
-  packages.belongsTo(cities, { as: "receiver_city", foreignKey: "receiver_city_id"});
-  cities.hasMany(packages, { as: "packages", foreignKey: "receiver_city_id"});
-  packages.belongsTo(cities, { as: "sender_city", foreignKey: "sender_city_id"});
-  cities.hasMany(packages, { as: "sender_city_packages", foreignKey: "sender_city_id"});
   tracking.belongsTo(packages, { as: "package", foreignKey: "package_id"});
   packages.hasMany(tracking, { as: "trackings", foreignKey: "package_id"});
   tracking.belongsTo(users, { as: "user", foreignKey: "user_id"});
@@ -37,6 +35,7 @@ function initModels(sequelize) {
     branches,
     cities,
     customers,
+    fees,
     packages,
     tracking,
     users,

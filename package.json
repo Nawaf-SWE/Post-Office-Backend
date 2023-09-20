@@ -5,18 +5,20 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon",
-    "sequelize": "sequelize-auto -h localhost -d postoffice -u root -x 12345 -p 3306  --dialect mysql -o ./models -l es6"
+    "sequelize": "sequelize-auto -h localhost -d postoffice -u root -x Password -p 3306  --dialect mysql -o ./models -l es6"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.4.0",
-    "sequelize": "^6.32.1"
+    "sequelize": "^6.32.1",
+    "sequelize-auto": "^0.8.8"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
